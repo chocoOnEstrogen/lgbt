@@ -120,6 +120,13 @@ void execute_command(const char *command) {
 }
 
 void create_directory(const char *path) {
+    // First check if we're already in the repository directory
+    if (chdir(path) == 0) {
+        // We're already in the directory, so no need to create it
+        chdir("..");  // Go back to parent directory
+        return;
+    }
+    
     if (mkdir(path, 0755) != 0 && errno != EEXIST) {
         char error[512];
         snprintf(error, sizeof(error), "Failed to create directory: %s", path);
