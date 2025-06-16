@@ -14,9 +14,9 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-20.04, macos-latest, windows-latest]
+        os: [ubuntu-22.04, macos-latest, windows-latest]
         include:
-          - os: ubuntu-20.04
+          - os: ubuntu-22.04
             artifact_name: lgbt-linux-amd64
             archive_name: lgbt-linux-amd64.tar.gz
             archive_cmd: tar czf
