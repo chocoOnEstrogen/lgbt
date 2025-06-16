@@ -1,0 +1,97 @@
+name: Build and Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_tag:
+        description: 'Version tag (format vX.Y.Z)'
+        required: true
+
+permissions:
+  contents: write  # Required for creating releases
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-20.04, macos-latest, windows-latest]
+        include:
+          - os: ubuntu-20.04
+            artifact_name: lgbt-linux-amd64
+            archive_name: lgbt-linux-amd64.tar.gz
+            archive_cmd: tar czf
+          - os: macos-latest
+            artifact_name: lgbt-macos-amd64
+            archive_name: lgbt-macos-amd64.tar.gz
+            archive_cmd: tar czf
+          - os: windows-latest
+            artifact_name: lgbt-windows-amd64
+            archive_name: lgbt-windows-amd64.zip
+            archive_cmd: powershell Compress-Archive
+
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential
+
+      - name: Install dependencies (macOS)
+        if: matrix.os == 'macos-latest'
+        run: |
+          brew install make
+
+      - name: Install dependencies (Windows)
+        if: matrix.os == 'windows-latest'
+        run: |
+          choco install make -y
+
+      - name: Build
+        run: |
+          make clean
+          make
+
+      - name: Create release directory
+        run: |
+          mkdir -p release
+          cp bin/lgbt* release/
+          cp resources/lgbt.1 release/
+          cp README.md release/
+          cp Makefile release/
+
+      - name: Create release archive
+        if: matrix.os != 'windows-latest'
+        run: |
+          cd release
+          ${{ matrix.archive_cmd }} ../${{ matrix.archive_name }} *
+
+      - name: Create release archive (Windows)
+        if: matrix.os == 'windows-latest'
+        run: |
+          cd release
+          ${{ matrix.archive_cmd }} -Path * -DestinationPath ../${{ matrix.archive_name }}
+
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.event.inputs.version_tag }}
+          name: Release ${{ github.event.inputs.version_tag }}
+          files: ${{ matrix.archive_name }}
+          generate_release_notes: true
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact_name }}
+          path: |
+            ${{ matrix.archive_name }}
+            release/

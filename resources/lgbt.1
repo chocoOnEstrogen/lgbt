@@ -1,0 +1,71 @@
+.TH LGBT 1 "June 2025" "Version 1.0" "User Commands"
+.SH NAME
+lgbt \- Display LGBTQ+ pride flags in the terminal
+.SH SYNOPSIS
+.B lgbt
+[\fIOPTIONS\fR]
+.SH DESCRIPTION
+.B lgbt
+is a command-line tool that displays various LGBTQ+ pride flags in the terminal using ANSI color codes.
+.SH OPTIONS
+.TP
+.B \-\-flag=\fIFLAGNAME\fR
+Specify the pride flag to display. Required option.
+.TP
+.B \-\-matrix=\fIWxH\fR
+Set the flag dimensions (width × height). Default is 32x16.
+.TP
+.B \-\-border
+Draw a border around the flag.
+.TP
+.B \-\-reverse
+Reverse the order of the flag's stripes.
+.TP
+.B \-\-list
+List all available flags and their descriptions.
+.TP
+.B \-\-help
+Display help message and exit.
+.SH AVAILABLE FLAGS
+.TP
+.B trans
+Transgender Pride Flag (blue, pink, white, pink, blue)
+.TP
+.B lesbian
+Lesbian Pride Flag (red, red, magenta, white, magenta, magenta, red)
+.TP
+.B rainbow
+Rainbow Pride Flag (red, orange, yellow, green, blue, magenta)
+.TP
+.B bi
+Bisexual Pride Flag (magenta, purple, blue)
+.TP
+.B pan
+Pansexual Pride Flag (magenta, yellow, cyan)
+.TP
+.B nonbinary
+Non-binary Pride Flag (yellow, white, purple, black)
+.TP
+.B ace
+Asexual Pride Flag (black, gray, white, purple)
+.SH EXAMPLES
+.TP
+Display the transgender pride flag:
+.B lgbt \-\-flag=trans
+.TP
+Display the lesbian pride flag with custom dimensions and border:
+.B lgbt \-\-flag=lesbian \-\-matrix=40x20 \-\-border
+.TP
+Display the rainbow flag in reverse order:
+.B lgbt \-\-flag=rainbow \-\-reverse
+.TP
+List all available flags:
+.B lgbt \-\-list
+.SH LIMITATIONS
+Maximum flag dimensions are 128x128 characters.
+.SH AUTHOR
+Written by the lgbt project contributors.
+.SH BUGS
+Report bugs at: https://github.com/chocoOnEstrogen/lgbt/issues
+.SH LICENSE
+This program is free software; you can redistribute it and/or modify it under the terms of the license included in the distribution. 
