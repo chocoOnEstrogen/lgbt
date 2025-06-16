@@ -11,7 +11,7 @@ This guide covers various methods to install the LGBT Flag Display Tool.
 
 ## Quick Installation
 
-The simplest way to install the tool is using the provided installer:
+The simplest way to install the tool:
 
 ```bash
 # Clone the repository
@@ -21,8 +21,8 @@ cd lgbt
 # Build the project
 make
 
-# Run the installer
-sudo ./bin/installer
+# Install
+sudo make install
 ```
 
 This will install the tool to the default locations:
@@ -31,44 +31,16 @@ This will install the tool to the default locations:
 
 ## Custom Installation
 
-The installer supports various customization options:
-
-### Custom Binary Location
+You can customize the installation location using the `INSTALL_PREFIX` variable:
 
 ```bash
-./bin/installer --path=/usr/local/bin
-```
-
-### Custom Man Page Location
-
-```bash
-./bin/installer --man-path=/usr/local/share/man/man1
-```
-
-### Custom Installation Prefix
-
-```bash
-./bin/installer --prefix=/usr/local
+# Install to /usr/local
+sudo make install INSTALL_PREFIX=/usr/local
 ```
 
 This will install to:
 - Binary: `/usr/local/bin/lgbt`
 - Man page: `/usr/local/share/man/man1/lgbt.1`
-
-## Manual Installation
-
-If you prefer to install manually:
-
-```bash
-# Build the project
-make
-
-# Install
-sudo make install
-
-# Or with custom prefix
-sudo make install INSTALL_PREFIX=/usr/local
-```
 
 ## Uninstallation
 
@@ -90,7 +62,7 @@ sudo rm /usr/share/man/man1/lgbt.1
 If you encounter permission errors, ensure you have sudo privileges and try:
 
 ```bash
-sudo ./bin/installer
+sudo make install
 ```
 
 ### Missing Dependencies

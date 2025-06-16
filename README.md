@@ -25,25 +25,19 @@ cd lgbt
 
 # Build and install
 make
-sudo ./bin/installer
+sudo make install
 ```
 
 ### Custom Installation
 
-The installer supports various installation options:
+You can customize the installation location:
 
 ```bash
 # Install to custom location
-./bin/installer --path=/usr/local/bin
-
-# Install with custom man page location
-./bin/installer --man-path=/usr/local/share/man/man1
-
-# Install with custom prefix
-./bin/installer --prefix=/usr/local
+sudo make install INSTALL_PREFIX=/usr/local
 
 # Show all options
-./bin/installer --help
+make help
 ```
 
 ## Usage

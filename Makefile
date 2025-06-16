@@ -25,14 +25,11 @@ endif
 
 # Directories
 SRC_DIR = src
-APP_DIR = $(SRC_DIR)/app
-INSTALLER_DIR = $(SRC_DIR)/installer
 BIN_DIR = bin
 RESOURCES_DIR = resources
 
 # Targets
 APP_TARGET = $(BIN_DIR)/lgbt
-INSTALLER_TARGET = $(BIN_DIR)/installer
 
 # Installation paths
 ifeq ($(UNAME_S),Darwin)
@@ -57,20 +54,15 @@ else ifeq ($(UNAME_S),MINGW32_NT-6.1)
     # Windows specific settings
     CFLAGS += -D_WIN32
     APP_TARGET := $(APP_TARGET).exe
-    INSTALLER_TARGET := $(INSTALLER_TARGET).exe
     BINDIR = $(INSTALL_PREFIX)/bin
     MANDIR = $(INSTALL_PREFIX)/share/man/man1
 endif
 
 .PHONY: all clean install uninstall
 
-all: $(APP_TARGET) $(INSTALLER_TARGET)
+all: $(APP_TARGET)
 
-$(APP_TARGET): $(APP_DIR)/main.c
-	@mkdir -p $(BIN_DIR)
-	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
-
-$(INSTALLER_TARGET): $(INSTALLER_DIR)/main.c
+$(APP_TARGET): $(SRC_DIR)/main.c
 	@mkdir -p $(BIN_DIR)
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
@@ -94,7 +86,7 @@ dev: all
 # Help target
 help:
 	@echo "Available targets:"
-	@echo "  all        - Build both the main program and installer (default)"
+	@echo "  all        - Build the main program (default)"
 	@echo "  clean      - Remove built binaries"
 	@echo "  install    - Install the program and man page"
 	@echo "  uninstall  - Remove installed files"
