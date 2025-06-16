@@ -1,1 +1,8 @@
 blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://github.com/chocoOnEstrogen/lgbt/tree/master/docs
+    about: Please check our documentation first for answers to common questions.
+  - name: Security Issues
+    url: https://github.com/chocoOnEstrogen/lgbt/security/policy
+    about: Please report security issues through our security policy.

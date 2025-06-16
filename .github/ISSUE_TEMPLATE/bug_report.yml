@@ -1,5 +1,5 @@
 name: Bug report
-description: Create a report to help us improve
+description: Create a report to help us improve the LGBT Flag Display Tool
 title: "[BUG] "
 labels: 
   - bug
@@ -7,21 +7,68 @@ body:
   - type: markdown
     attributes:
       value: |
-        **Describe the bug**
-        A clear and concise description of what the bug is.
+        Thanks for taking the time to fill out this bug report!
+
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: "Bug Description"
+      description: "A clear and concise description of what the bug is"
+      placeholder: "Describe the bug you encountered..."
 
   - type: textarea
     id: reproduce
     attributes:
-      label: "To Reproduce"
+      label: "Steps to Reproduce"
       description: "Steps to reproduce the behavior"
-      placeholder: "1. Go to '...'\n2. Click on '....'\n3. Scroll down to '....'\n4. See error"
+      placeholder: |
+        1. Run command '...'
+        2. Use flag '...'
+        3. See error
 
-  - type: input
+  - type: textarea
     id: expected
     attributes:
-      label: "Expected behavior"
+      label: "Expected Behavior"
       description: "A clear and concise description of what you expected to happen"
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: "Actual Behavior"
+      description: "What actually happened"
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: "Operating System"
+      options:
+        - Linux
+        - macOS
+        - Windows
+        - Other
+
+  - type: input
+    id: terminal
+    attributes:
+      label: "Terminal Emulator"
+      description: "Which terminal emulator are you using? (e.g., xterm, iTerm2, Windows Terminal)"
+
+  - type: input
+    id: version
+    attributes:
+      label: "Tool Version"
+      description: "Version of the LGBT Flag Display Tool (use --version to check)"
+
+  - type: textarea
+    id: build-info
+    attributes:
+      label: "Build Information"
+      description: "How did you build the tool? (e.g., make, make dev, custom flags)"
+      placeholder: |
+        Build command used:
+        Compiler version:
+        Any custom build flags:
 
   - type: textarea
     id: screenshots
@@ -29,55 +76,8 @@ body:
       label: "Screenshots"
       description: "If applicable, add screenshots to help explain your problem"
 
-  - type: dropdown
-    id: desktop-info
-    attributes:
-      label: "Desktop (please complete the following information)"
-      options:
-        - Windows
-        - macOS
-        - Linux
-
-  - type: input
-    id: browser
-    attributes:
-      label: "Browser"
-      description: "e.g. Chrome, Firefox, Safari"
-  
-  - type: input
-    id: version
-    attributes:
-      label: "Version"
-      description: "e.g. 22"
-
-  - type: input
-    id: smartphone
-    attributes:
-      label: "Smartphone (please complete the following information)"
-      description: "Device (e.g. iPhone6, Samsung Galaxy S10)"
-  
-  - type: dropdown
-    id: smartphone-os
-    attributes:
-      label: "OS"
-      options:
-        - iOS
-        - Android
-
-  - type: input
-    id: smartphone-browser
-    attributes:
-      label: "Browser"
-      description: "e.g. stock browser, Safari"
-
-  - type: input
-    id: smartphone-version
-    attributes:
-      label: "Version"
-      description: "e.g. 22"
-
   - type: textarea
-    id: additional-context
+    id: additional
     attributes:
-      label: "Additional context"
+      label: "Additional Context"
       description: "Add any other context about the problem here"
